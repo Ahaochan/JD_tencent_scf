@@ -110,13 +110,14 @@ if ($.isNode()) {
     await pasture();
     await $.wait(2000);
   }
-  $.res = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jxmc.json')
-  if (!$.res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jxmc.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
-    await $.wait(1000)
-    $.res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jxmc.json')
-  }
-  $.res = [...($.res || []), ...(await getAuthorShareCode('https://fastly.jsdelivr.net/gh/zero205/updateTeam@main/shareCodes/jxmc2.json') || [])]
+  // $.res = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jxmc.json')
+  // if (!$.res) {
+  //   $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jxmc.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+  //   await $.wait(1000)
+  //   $.res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jxmc.json')
+  // }
+  // $.res = [...($.res || []), ...(await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jxmc2.json') || [])]
+  $.res = [];
   await shareCodesFormat()
   for (let i = 0; i < cookiesArr.length; i++) {
     $.cookie = cookiesArr[i];
@@ -910,27 +911,32 @@ function getAuthorShareCode(url) {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     $.newShareCodes = []
-    const readShareCodeRes = await readShareCode();
+    // const readShareCodeRes = await readShareCode();
+    const readShareCodeRes = null;
     if (readShareCodeRes && readShareCodeRes.code === 200) {
       $.newShareCodes = [...new Set([...$.inviteCodeList, ...($.res || []), ...(readShareCodeRes.data || [])])];
     } else {
       $.newShareCodes = [...new Set([...$.inviteCodeList, ...($.res || [])])];
     }
+    $.newShareCodes = [...new Set([...$.newShareCodes, ...([
+      "g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcbcbMpfkVQPLnlNxOatd--C2gstq0419Nud8Kp310uBYw",
+      "g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcauH7lwHZKEtMIX3P_OOjZQZA7eUhQYQD5zIwq_wTxBJg",
+    ])])];
     console.log(`\n您将要助力的好友${JSON.stringify($.newShareCodes)}`)
     resolve();
   })
 }
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `https://transfer.nz.lu/jxmc`, timeout: 30 * 1000}, (err, resp, data) => {
+    $.get({url: ``, timeout: 30 * 1000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
           console.log(`${$.name} readShareCode API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`\n随机取20个码放到您固定的互助码后面(不影响已有固定互助)`)
-            data = JSON.parse(data);
+            //console.log(`\n随机取20个码放到您固定的互助码后面(不影响已有固定互助)`)
+            //data = JSON.parse(data);
           }
         }
       } catch (e) {

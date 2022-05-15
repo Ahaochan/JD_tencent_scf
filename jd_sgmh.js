@@ -28,7 +28,7 @@ const $ = new Env('闪购盲盒');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let appId = '1EFRXxg' , homeDataFunPrefix = 'interact_template', collectScoreFunPrefix = 'harmony', message = ''
 let lotteryResultFunPrefix = homeDataFunPrefix, browseTime = 6
-const inviteCodes = ['T0225KkcRUxL9FKDJh7ylvMLcACjVWmIaW5kRrbA','T0225KkcRx0Q_AaCdRr1xf8DIQCjVWmIaW5kRrbA','T0225KkcRksZpgDSIBj3xvADdQCjVWmIaW5kRrbA','T018v_52Qxge81HeJB2b1ACjVWmIaW5kRrbA','T0205KkcPFd_vD2uSkCi3YhXCjVWmIaW5kRrbA','T018v_hzQhwZ8FbUIRib1ACjVQmoaT5kRrbA'].sort(() => 0.5 - Math.random()).splice(0,3)
+const inviteCodes = [''].sort(() => 0.5 - Math.random()).splice(0,3)
 const ZLC = !(process.env.JD_JOIN_ZLC && process.env.JD_JOIN_ZLC === 'false')
 const randomCount = $.isNode() ? 20 : 5;
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -317,11 +317,15 @@ function shareCodesFormat() {
     if (!ZLC) {
       console.log(`您设置了不加入助力池，跳过\n`)
     } else {
-      const readShareCodeRes = await readShareCode();
-      if (readShareCodeRes && readShareCodeRes.code === 200) {
-        $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])]
-      }
+      // const readShareCodeRes = await readShareCode();
+      // if (readShareCodeRes && readShareCodeRes.code === 200) {
+      //   $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];
+      // }
     }
+    $.newShareCodes = [...new Set([...$.newShareCodes, ...([
+      "T0225KkcRxoQ8FSDKEumnPYOdgCjVQmoaT5kRrbA",
+      "T0225KkcRRpIpgHRKB6llqRfcACjVQmoaT5kRrbA",
+    ])])];
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)
     resolve();
   })
@@ -331,7 +335,7 @@ function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
     $.get({
-      url: `https://transfer.nz.lu/sgmh`,
+      url: ``,
       'timeout': 10000
     }, (err, resp, data) => {
       try {
@@ -340,8 +344,8 @@ function readShareCode() {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
-            data = JSON.parse(data);
+            // console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
+            // data = JSON.parse(data);
           }
         }
       } catch (e) {

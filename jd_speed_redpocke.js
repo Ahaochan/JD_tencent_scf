@@ -25,8 +25,8 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let cookiesArr = [], cookie = '', message;
-const linkIds = ["Eu7-E0CUzqYyhZJo9d3YkQ"];
-const codeIds = ["AEIIwA6L3k8ePzU3fXDzg8sPlLyAUpJKplSENnlQTGA", "AghrnocwyBzh_6aDh3BPmS5acIv86eToUuynlVFt-GU", "VqFbegTWUP9DJrZBj0UUJw"][Math.floor((Math.random() * 3))];
+const linkIds = ["7ya6o83WSbNhrbYJqsMfFA","Eu7-E0CUzqYyhZJo9d3YkQ"];
+const codeIds = "TkJlwF1aHX5wcdK1MFC8n-_YzZ2H7x_0mE7_Xgy75RU";
 const signLinkId = '9WA12jYGulArzWS7vcrwhw';
 let linkId
 
@@ -97,8 +97,8 @@ async function jsRedPacket() {
 
 function invite2() {
   let inviterId = [
-    "/eNHdfn6fP+TFwVda3ipjWwvTFqeKBZaRG38adWABKk=",
-    "Sev6JWjut6GyaEHJIWpSQQ=="
+    "TkJlwF1aHX5wcdK1MFC8n-_YzZ2H7x_0mE7_Xgy75RU",
+    "TkJlwF1aHX5wcdK1MFC8n-_YzZ2H7x_0mE7_Xgy75RU"
   ][Math.floor((Math.random() * 2))]
   let headers = {
     'Host': 'api.m.jd.com',
@@ -389,7 +389,7 @@ function cashOut(id, poolBaseId, prizeGroupId, prizeBaseId,) {
       "prizeType": 4
     },
     linkId,
-    "inviter": ""
+    "inviter": "TkJlwF1aHX5wcdK1MFC8n-_YzZ2H7x_0mE7_Xgy75RU"
   }
   return new Promise(resolve => {
     $.post(taskPostUrl("apCashWithDraw", body), async (err, resp, data) => {

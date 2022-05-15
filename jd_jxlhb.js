@@ -54,12 +54,14 @@ $.appId = "e395f"
     await $.wait(1000)
     res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jxhb.json')
   }
+  if (res) res.codes = [];
   if (res && res.activeId) $.activeId = res.activeId;
-  let res2 = await getAuthorShareCode('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/jxhb.json')
-  if (!res2) {
-    await $.wait(1000)
-    res2 = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jxhb.json')
-  }
+  // let res2 = await getAuthorShareCode('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/jxhb.json')
+  // if (!res2) {
+  //   await $.wait(1000)
+  //   res2 = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jxhb.json')
+  // }
+  let res2 = []
   $.authorMyShareIds = [...((res && res.codes) || []),...(res2 || [])];
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
   await requestAlgo()

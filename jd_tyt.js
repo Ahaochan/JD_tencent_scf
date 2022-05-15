@@ -79,7 +79,11 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
   }
   // nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000)
   if (new Date().getHours() >= 12) {
-    await getAuthorShareCode()
+    // await getAuthorShareCode()
+    $.authorCode = [
+        "1fa300d25bd340729ce6e19d63dfe4bb-amRfNzQ5NTBkOGFiODE0Mg!!",
+        "230fd61b432a46008407ac1fe67aeabc-amRfNTRhY2U2ODRhMmNlNA!!",
+    ]
     if ($.authorCode && $.authorCode.length) {
       for (let i = 0; i < cookiesArr.length; i++) {
         if (cookiesArr[i]) {

@@ -28,7 +28,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let UA = $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
-let shareId = 'KMnydTyM9ezAduo1QsTZZsAdoUJQ3Dik'
+let shareId = "jeU8Mo8y7sWPS6-ZmvueGsAdoUJQ3Dik"
 $.shareCodes = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -45,15 +45,15 @@ if ($.isNode()) {
     return;
   }
   if (process.env.PIGPETSHARECODE) {
-    shareId = process.env.PIGPETSHARECODE
-  } else {
-    let res = await getAuthorShareCode('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/pigPet.json')
-    if (!res) {
-      res = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/pigPet.json')
-    }
-    if (res) {
-      shareId = res[Math.floor((Math.random() * res.length))];
-    }
+    // shareId = process.env.PIGPETSHARECODE
+  } else{
+    // let res = await getAuthorShareCode('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/pigPet.json')
+    // if (!res) {
+    //   res = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/pigPet.json')
+    // }
+    // if (res){
+    //   shareId = res[Math.floor((Math.random() * res.length))];
+    // }
   }
   console.log(`\n【原作者：LXK大佬】\n\nBy：zero205\n添加：邀请新用户，大转盘助力，抢粮食\n修改：优化日志输出，自动喂食\n\n默认不抢粮食（成功机率小），需要的请添加变量JD_PIGPET_PK，值填true\nTodo：领取成就奖励\n`);
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -77,7 +77,7 @@ if ($.isNode()) {
     }
   }
   console.log(`\n======开始大转盘助力======\n`);
-  $.helpId = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/pig.json');
+  // $.helpId = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/pig.json');
   $.shareCodes = [...$.shareCodes, ...($.helpId || [])]
   for (let j = 0; j < cookiesArr.length; j++) {
     cookie = cookiesArr[j];
@@ -424,11 +424,11 @@ function pigPetRank() {
                   if ($.friends[i].status === 1) {
                     $.friendId = $.friends[i].uid
                     $.name = $.friends[i].nickName
-                    if (!['zero205', 'xfa05'].includes($.name)) { //放过孩子吧TT
+                    // if (!['zero205', 'xfa05'].includes($.name)) { //放过孩子吧TT
                       console.log(`去抢夺【${$.friends[i].nickName}】的食物`)
                       await $.wait(2000)
                       await pigPetFriendIndex($.friendId)
-                    }
+                    // }
                   }
                 }
               } else {
@@ -617,6 +617,7 @@ function pigPetLotteryHelpFriend(helpId) {
       "channelLV": "juheye",
       "riskDeviceParam": "{}"
     }
+    console.log(`开始大转盘助力${helpId}`)
     $.post(taskUrl('pigPetLotteryHelpFriend', body), (err, resp, data) => {
       try {
         if (err) {

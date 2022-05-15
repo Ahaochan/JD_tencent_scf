@@ -64,7 +64,7 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
             await main()
         }
     };
-    $.shareCoseList = [...new Set([...$.shareCoseList,'QmLpaFXm34BaWgn3C3O2WA','ffn_Yc--WKEab2iPzmVB4BM3VKR8-0h7mdYsY627fC0','c_HK4TBhdsqsRJPgFj7RpA'])]
+    $.shareCoseList = [...new Set([...$.shareCoseList])]
     //去助力与开箱
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
@@ -123,13 +123,13 @@ async function main() {
                 $.helpLimit = $.oneTask.taskLimitTimes;
             };
             if (["BROWSE_SHOP"].includes($.oneTask.taskType) && $.oneTask.taskFinished === false) {
-                await apTaskDetail({ "taskId": $.oneTask.id, "taskType": $.oneTask.taskType, "channel": 4, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "7pcfSWHrAG9MKu3RKLl127VL5L4aIE1sZ1eRRdphpl8" });
+                await apTaskDetail({ "taskId": $.oneTask.id, "taskType": $.oneTask.taskType, "channel": 4, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "" });
                 await $.wait(1000)
                 for (let y = 0; y < ($.doList.status.finishNeed - $.doList.status.userFinishedTimes); y++) {
                     $.startList = $.doList.taskItemList[y];
                     $.itemName = $.doList.taskItemList[y].itemName;
                     console.log(`去浏览${$.itemName}`)
-                    await apDoTask({ "taskId": $.allList[i].id, "taskType": $.allList[i].taskType, "channel": 4, "itemId": $.startList.itemId, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "7pcfSWHrAG9MKu3RKLl127VL5L4aIE1sZ1eRRdphpl8" })
+                    await apDoTask({ "taskId": $.allList[i].id, "taskType": $.allList[i].taskType, "channel": 4, "itemId": $.startList.itemId, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "" })
                     await $.wait(1000)
                 }
             }

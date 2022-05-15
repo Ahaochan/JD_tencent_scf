@@ -245,7 +245,7 @@ await $.wait(8000)
 async function readShareCodes(){
   return new Promise((resolve) => {
     let url = {
-   		url: `https://raw.githubusercontent.com/Ariszy/TGBOT/main/sjjc.js`,       
+   		url: ``,
    	}
    $.get(url,async(error, response, data) =>{
     try{
@@ -277,7 +277,7 @@ async function readShareCodes(){
   } 
 
 async function formatcode(){
-await readShareCodes();
+// await readShareCodes();
 var newsharecodes = [];
 var arr = CodeArr
 var count = arr.length;

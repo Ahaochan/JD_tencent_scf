@@ -48,9 +48,10 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
   //   await $.wait(1000)
   //   $.updatePkActivityIdRes = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_cityShareCodes.json')
   // }
+  $.updatePkActivityIdRes = [];
   let tempcode = []
-  tempcode = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jd_cityShareCodes.json')
-  $.updatePkActivityIdRes = [...(tempcode || [])]
+  // tempcode = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jd_cityShareCodes.json')
+  $.updatePkActivityIdRes = [...$.updatePkActivityIdRes,...(tempcode || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -260,14 +261,15 @@ function getAuthorShareCode(url) {
 
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `https://transfer.nz.lu/carnivalcity`, 'timeout': 20000}, (err, resp, data) => {
+    $.get({url: ``, 'timeout': 20000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            data = JSON.parse(data);
+            // data = JSON.parse(data);
+            data = {};
           }
         }
       } catch (e) {
@@ -283,7 +285,7 @@ function readShareCode() {
 //格式化助力码
 function shareCodesFormat() {
   return new Promise(async resolve => {
-    $.newShareCodes = [...new Set([...$.shareCodes, ...$.updatePkActivityIdRes])];
+    $.newShareCodes = [];
     // const readShareCodeRes = await readShareCode();
     // if (readShareCodeRes && readShareCodeRes.code === 200) {
     //   $.newShareCodes = [...new Set([...$.shareCodes, ...$.updatePkActivityIdRes, ...(readShareCodeRes.data || [])])];

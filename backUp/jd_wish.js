@@ -67,12 +67,13 @@ if ($.isNode()) {
     if ($.isNode()) await notify.sendNotify($.name, allMessage);
     $.msg($.name, '', allMessage)
   }
-  let res = await getAuthorShareCode('http://adguard.ipq.co/wish.json')
-  if (!res) {
-    $.http.get({url: 'http://adguard.ipq.co/wish.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
-    await $.wait(1000)
-    res = await getAuthorShareCode('http://adguard.ipq.co/wish.json')
-  }
+  // let res = await getAuthorShareCode('http://adguard.ipq.co/wish.json')
+  // if (!res) {
+  //   $.http.get({url: 'http://adguard.ipq.co/wish.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+  //   await $.wait(1000)
+  //   res = await getAuthorShareCode('http://adguard.ipq.co/wish.json')
+  // }
+  let res = [];
   $.shareCode = [...$.shareCode, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {

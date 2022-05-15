@@ -60,17 +60,17 @@ let pool = []
   } else {
     console.log(`脚本不会自动抽奖，设置JD_CITY_EXCHANGE为true，默认关闭`)
   }
-  if (process.env.CT_R != 'false') {
+  if (process.env.CT_R != 'false' && new Date().getHours() > 15) {
     cookiesArr = cookiesArr.sort(() => 0.5 - Math.random())
     console.log('CK顺序打乱!用来随机内部互助!,如需关闭CT_R为false')
   }
-  let res = await getAuthorShareCode('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/city.json')
-  if (!res) {
-    res = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/city.json')
-  }
-  if (res) {
-    author_codes = res.sort(() => 0.5 - Math.random())
-  }
+  // let res = await getAuthorShareCode('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/city.json')
+  // if (!res) {
+  //   res = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/city.json')
+  // }
+  // if (res) {
+  //   author_codes = res.sort(() => 0.5 - Math.random())
+  // }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -111,6 +111,7 @@ let pool = []
         }
         if ((res && res['status'] && res['status'] === '3') || (res && res.data && res.data.bizCode === -11)) {
           // 助力次数耗尽 || 黑号
+          console.log('助力次数耗尽 || 黑号')
           break
         }
         await $.wait(1500)
@@ -301,7 +302,7 @@ function city_lotteryAward() {
 }
 function readShareCode(num=3) {
   return new Promise(async resolve => {
-    $.get({url: `https://transfer.nz.lu/city/${num}`, 'timeout': 10000}, (err, resp, data) => {
+    $.get({url: ``, 'timeout': 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -326,7 +327,8 @@ function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
     $.newShareCodes = []
-    const readShareCodeRes = await readShareCode(3);
+    // const readShareCodeRes = await readShareCode(3);
+    const readShareCodeRes = null;
     if (readShareCodeRes && readShareCodeRes.code === 200) {
       pool = readShareCodeRes.data || [];
     }
@@ -340,17 +342,17 @@ function shareCodesFormat() {
         }
       }
     }
-    if ($.index == 1) {
+    if ($.index == 1 && false) {
       console.log('首个帐号,助力作者和池子')
       $.newShareCodes = [...new Set([...author_codes,...pool,...$.newShareCodes])]
     } else{
-      if (process.env.CT_POOL != 'false') {
-        console.log('默认助力作者和池子,助力码依然优先')
-        $.newShareCodes = [...new Set([...$.newShareCodes,...author_codes,...pool,...self_code])]
-      }else{
+      // if (process.env.CT_POOL != 'false') {
+      //   console.log('默认助力作者和池子,助力码依然优先')
+      //   $.newShareCodes = [...new Set([...$.newShareCodes,...author_codes,...pool,...self_code])]
+      // }else{
         console.log('非首个个帐号,优先向前助力')
         $.newShareCodes = [...new Set([...$.newShareCodes,...self_code,...author_codes,...pool])]
-      }
+      // }
     }
 
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)

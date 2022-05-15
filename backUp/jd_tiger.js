@@ -66,10 +66,11 @@ Object.keys(jdCookieNode).forEach((item) => {
         }
     }
     let authorCode = []
-    let res = await getAuthorShareCode('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/tiger.json')
-    if (!res) {
-        res = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/tiger.json')
-    }
+    // let res = await getAuthorShareCode('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/tiger.json')
+    // if (!res) {
+    //     res = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/tiger.json')
+    // }
+    let res = [];
     if (res) {
         authorCode = res.sort(() => 0.5 - Math.random())
         const limit = 3
@@ -80,7 +81,8 @@ Object.keys(jdCookieNode).forEach((item) => {
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i]
         const userName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
-        const pool = await getShareCodePool('tiger', 5)
+        // const pool = await getShareCodePool('tiger', 5)
+        const pool = [];
         // if (shareCodesHW.length === 0) {
         //     shareCodesHW = await getshareCodeHW('tiger')
         // }
@@ -197,7 +199,7 @@ async function getShareCodePool(key, num) {
         try {
             const { body } = await got(`https://api.jdsharecode.xyz/api/${key}/${num}`)
             console.debug('getShareCodePool:', body)
-            shareCode = JSON.parse(body).data || []
+            // shareCode = JSON.parse(body).data || []
             console.log(`随机获取${num}个${key}成功：${JSON.stringify(shareCode)}`)
             if (shareCode.length !== 0) {
                 break
