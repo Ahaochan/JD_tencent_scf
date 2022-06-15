@@ -10,7 +10,7 @@ cron 0 0,10,20 * * * jd_618_red.js
 
 */
 const $ = new Env('618红包');
-$.CODE618 = $.isNode() ? (process.env.CODE618 ? process.env.CODE618 : '') : '';
+$.CODE618 = 'lMfhHN2';
 const jdCookieNode = require('./jdCookie.js');
 let cookiesArr = [];
 if ($.isNode()) {
@@ -51,8 +51,8 @@ let appId, fingerprint, token, enCryptMethodJD;
     }
 })().catch((e) => { $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '') }).finally(() => { $.done(); })
 
-async function main(ck, code = 'JKhfec3') {
-    const codes = ['Nwupb9b','NKuABHo','NMuPh4j','NKufjm1','JKhfec3']
+async function main(ck, code = 'lMfhHN2') {
+    const codes = ['lMfhHN2','lMfhHN2','lMfhHN2','lMfhHN2','lMfhHN2']
     code = $.CODE618 ? $.CODE618 : codes[random(0, codes.length)]
     // console.log(code)
     let userName = decodeURIComponent(ck.match(/pt_pin=([^; ]+)(?=;?)/) && ck.match(/pt_pin=([^; ]+)(?=;?)/)[1])
